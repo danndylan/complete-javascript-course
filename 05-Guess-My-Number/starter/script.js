@@ -1,18 +1,5 @@
 'use strict';
 
-/*
-console.log(document.querySelector('.message').textContent);
-document.querySelector('.message').textContent = 'Correct Number! 🎉';
-
-document.querySelector('.number').textContent = 13;
-
-document.querySelector('.score').textContent = 19;
-
-document.querySelector('.guess').value = 23;
-
-console.log(document.querySelector('.guess').value);
-*/
-
 let targetNumber = Math.trunc(Math.random() * 20) + 1;
 
 let score = 20;
@@ -37,8 +24,6 @@ document.querySelector('.check').addEventListener('click', function () {
 
   document.querySelector('.message').textContent = message;
   document.querySelector('.score').textContent = score;
-
-  console.log(guess, targetNumber, score);
 });
 
 document.querySelector('.again').addEventListener('click', function () {
