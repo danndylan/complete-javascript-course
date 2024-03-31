@@ -41,66 +41,119 @@ const restaurant = {
   orderPasta: function (ing1, ing2, ing3) {
     console.log(`pasta with ${ing1}, ${ing2} and ${ing3}`);
   },
+
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
 };
 
-restaurant.orderDelivery({
-  time: '22:30',
-  address: 'Via del Sole, 21',
-  mainIndex: 2,
-  starterIndex: 2,
-});
+console.log('---- OR ----');
 
-restaurant.orderDelivery({
-  address: 'Vic Park',
-});
+//can use ANY data type, return ANY data type, short-circuiting
+console.log(3 || 'dylan');
+console.log('' || 'dylan');
+console.log(true || 0);
+console.log(undefined || null);
 
-const { name, openingHours, categories } = restaurant;
-console.log(name, openingHours, categories);
+// restaurant.numGuests = 23;
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1);
 
-const {
-  name: restaurantName,
-  openingHours: hours,
-  categories: tags,
-} = restaurant;
-console.log(restaurantName, hours, tags);
+const numGuests2 = restaurant.numGuests || 10;
+console.log(numGuests2);
 
-const { menu = [], starterMenu: starters = [] } = restaurant;
-console.log(menu, starters);
+console.log('---- AND ----');
+console.log(0 && 'dylan');
+console.log(7 && 'dylan');
 
-//mutating variables
-let a = 111;
-let b = 222;
-const obj = { a: 23, b: 7, c: 15 };
-({ b, a } = obj);
-console.log(b, a);
+console.log('hello' && 23 && null && 'jonas');
 
-//nested objects
-const {
-  fri: { open, close },
-} = openingHours;
-console.log(open, close);
+//practice
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('mushrooms', 'tomato');
+}
 
-const arr = [7, 8, 9];
-const newArr = [1, 2, ...arr];
-console.log(newArr);
-console.log(...newArr);
+restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'tomato');
 
-const newMenu = [...restaurant.mainMenu, 'Gnocci'];
-console.log(newMenu);
+// restaurant.orderDelivery({
+//   time: '22:30',
+//   address: 'Via del Sole, 21',
+//   mainIndex: 2,
+//   starterIndex: 2,
+// });
 
-//copy array
-const mainMenucopy = [...restaurant.mainMenu];
+// restaurant.orderDelivery({
+//   address: 'Vic Park',
+// });
 
-//join 2 arrays
-const allMenu = [...restaurant.starterMenu, ...restaurant.mainMenu];
-console.log(allMenu);
+// const { name, openingHours, categories } = restaurant;
+// console.log(name, openingHours, categories);
 
-const ingredients = [
-  prompt("Let's make pasta. Ingeedient 1"),
-  prompt("Let's make pasta. Ingeedient 2"),
-  prompt("Let's make pasta. Ingeedient 3"),
-];
-console.log(ingredients);
+// const {
+//   name: restaurantName,
+//   openingHours: hours,
+//   categories: tags,
+// } = restaurant;
+// console.log(restaurantName, hours, tags);
+
+// const { menu = [], starterMenu: starters = [] } = restaurant;
+// console.log(menu, starters);
+
+// //mutating variables
+// let a = 111;
+// let b = 222;
+// const obj = { a: 23, b: 7, c: 15 };
+// ({ b, a } = obj);
+// console.log(b, a);
+
+// //nested objects
+// const {
+//   fri: { open, close },
+// } = openingHours;
+// console.log(open, close);
+
+// const arr = [7, 8, 9];
+// const newArr = [1, 2, ...arr];
+// console.log(newArr);
+// console.log(...newArr);
+
+// const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+// console.log(newMenu);
+
+// //copy array
+// const mainMenucopy = [...restaurant.mainMenu];
+
+// //join 2 arrays
+// const allMenu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+// console.log(allMenu);
+
+// const ingredients = [
+//   // prompt("Let's make pasta. Ingeedient 1"),
+//   // prompt("Let's make pasta. Ingeedient 2"),
+//   // prompt("Let's make pasta. Ingeedient 3"),
+// ];
+// console.log(ingredients);
+
+// const { sat, ...weekdays } = restaurant.openingHours;
+// console.log(sat, weekdays);
+
+// //Functions
+// const add = function (...numbers) {
+//   let sum = 0;
+//   for (let i = 0; i < numbers.length; i++) sum += numbers[i];
+//   console.log(sum);
+// };
+
+// add(2, 3);
+// add(2, 3, 4);
+// add(6, 7, 8, 9);
+
+// const x = [23, 5, 7];
+// add(...x);
+
+// restaurant.orderPizza('mushrooms', 'onions', 'olives', 'tomato');
+// restaurant.orderPizza('pepperoni');
 
 //Books Assignment
 const books = [
