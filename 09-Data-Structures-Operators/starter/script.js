@@ -48,6 +48,36 @@ const restaurant = {
   },
 };
 
+const rest1 = {
+  name: 'Capri',
+  numGuests: 20,
+};
+const rest2 = {
+  name: 'La Piazza',
+  owner: 'Giovani Rossi',
+  numGuests: 0,
+};
+
+// rest2.numGuests = rest2.numGuests || 10;
+
+//rest2.numGuests ||= 10;
+
+// rest2.numGuests ??= 10;
+
+rest2.owner &&= '<ANONYMOUS>';
+
+console.log(rest2);
+
+/**
+restaurant.numGuests = 0;
+
+const guests = restaurant.numGuests || 10;
+console.log(guests);
+
+// nullish: null and undefined (NOT 0 or '')
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect);
+
 console.log('---- OR ----');
 
 //can use ANY data type, return ANY data type, short-circuiting
@@ -76,84 +106,86 @@ if (restaurant.orderPizza) {
 
 restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'tomato');
 
-// restaurant.orderDelivery({
-//   time: '22:30',
-//   address: 'Via del Sole, 21',
-//   mainIndex: 2,
-//   starterIndex: 2,
-// });
+restaurant.orderDelivery({
+  time: '22:30',
+  address: 'Via del Sole, 21',
+  mainIndex: 2,
+  starterIndex: 2,
+});
 
-// restaurant.orderDelivery({
-//   address: 'Vic Park',
-// });
+restaurant.orderDelivery({
+  address: 'Vic Park',
+});
 
-// const { name, openingHours, categories } = restaurant;
-// console.log(name, openingHours, categories);
+const { name, openingHours, categories } = restaurant;
+console.log(name, openingHours, categories);
 
-// const {
-//   name: restaurantName,
-//   openingHours: hours,
-//   categories: tags,
-// } = restaurant;
-// console.log(restaurantName, hours, tags);
+const {
+  name: restaurantName,
+  openingHours: hours,
+  categories: tags,
+} = restaurant;
+console.log(restaurantName, hours, tags);
 
-// const { menu = [], starterMenu: starters = [] } = restaurant;
-// console.log(menu, starters);
+const { menu = [], starterMenu: starters = [] } = restaurant;
+console.log(menu, starters);
 
-// //mutating variables
-// let a = 111;
-// let b = 222;
-// const obj = { a: 23, b: 7, c: 15 };
-// ({ b, a } = obj);
-// console.log(b, a);
+//mutating variables
+let a = 111;
+let b = 222;
+const obj = { a: 23, b: 7, c: 15 };
+({ b, a } = obj);
+console.log(b, a);
 
-// //nested objects
-// const {
-//   fri: { open, close },
-// } = openingHours;
-// console.log(open, close);
+//nested objects
+const {
+  fri: { open, close },
+} = openingHours;
+console.log(open, close);
 
-// const arr = [7, 8, 9];
-// const newArr = [1, 2, ...arr];
-// console.log(newArr);
-// console.log(...newArr);
+const arr = [7, 8, 9];
+const newArr = [1, 2, ...arr];
+console.log(newArr);
+console.log(...newArr);
 
-// const newMenu = [...restaurant.mainMenu, 'Gnocci'];
-// console.log(newMenu);
+const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+console.log(newMenu);
 
-// //copy array
-// const mainMenucopy = [...restaurant.mainMenu];
+//copy array
+const mainMenucopy = [...restaurant.mainMenu];
 
-// //join 2 arrays
-// const allMenu = [...restaurant.starterMenu, ...restaurant.mainMenu];
-// console.log(allMenu);
+//join 2 arrays
+const allMenu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(allMenu);
 
-// const ingredients = [
-//   // prompt("Let's make pasta. Ingeedient 1"),
-//   // prompt("Let's make pasta. Ingeedient 2"),
-//   // prompt("Let's make pasta. Ingeedient 3"),
-// ];
-// console.log(ingredients);
+const ingredients = [
+  // prompt("Let's make pasta. Ingeedient 1"),
+  // prompt("Let's make pasta. Ingeedient 2"),
+  // prompt("Let's make pasta. Ingeedient 3"),
+];
+console.log(ingredients);
 
-// const { sat, ...weekdays } = restaurant.openingHours;
-// console.log(sat, weekdays);
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(sat, weekdays);
 
-// //Functions
-// const add = function (...numbers) {
-//   let sum = 0;
-//   for (let i = 0; i < numbers.length; i++) sum += numbers[i];
-//   console.log(sum);
-// };
+//Functions
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) sum += numbers[i];
+  console.log(sum);
+};
 
-// add(2, 3);
-// add(2, 3, 4);
-// add(6, 7, 8, 9);
+add(2, 3);
+add(2, 3, 4);
+add(6, 7, 8, 9);
 
-// const x = [23, 5, 7];
-// add(...x);
+const x = [23, 5, 7];
+add(...x);
 
-// restaurant.orderPizza('mushrooms', 'onions', 'olives', 'tomato');
-// restaurant.orderPizza('pepperoni');
+restaurant.orderPizza('mushrooms', 'onions', 'olives', 'tomato');
+restaurant.orderPizza('pepperoni');
+
+*/
 
 //Books Assignment
 const books = [
