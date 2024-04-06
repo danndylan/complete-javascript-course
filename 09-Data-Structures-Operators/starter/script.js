@@ -14,7 +14,8 @@ along with the goal number (Example: "Goal 1: Lewandowski")
       Odd of victory Bayern Munich: 1.33
       Odd of draw: 3.25
       Odd of victory Borrussia Dortmund: 6.5
-Get the team names directly from the game object, don't hardcode them (except for "draw"). HINT: Note how the odds and the game objects have the same property names 😉
+Get the team names directly from the game object, don't hardcode them (except for "draw").
+HINT: Note how the odds and the game objects have the same property names 😉
 
 BONUS: Create an object called 'scorers' which contains the names of the players who scored as properties, and the number of goals as the value. In this game, it will look like this:
       {
@@ -83,19 +84,23 @@ const game = {
   date: 'Nov 9th, 2037',
   odds: {
     team1: 1.33,
-    x: 1.25,
+    x: 3.25,
     team2: 6.5,
   },
 };
 
-for (const [numGoal, scorer] of game.scored.entries()) {
+for (const [numGoal, scorer] of game.scored.entries())
   console.log(`Goal ${numGoal + 1}: ${scorer}`);
-}
 
-for (let x of Object.entries(game.odds)) {
-  // console.log(x[0]);
-  let team = x[0];
-  console.log(`Odd of victory ${game.team}`);
+let total = 0;
+const values = Object.values(game.odds);
+for (const odd of values) total += odd;
+console.log(total / values.length);
+
+const odds = Object.entries(game.odds);
+for (let [team, odd] of odds) {
+  const teamStr = game[team] ? `victory ${game[team]}` : 'draw';
+  console.log(`Odd of ${teamStr}: ${odd}`);
 }
 
 // console.log((team1 < team2 && game.team1) || (team2 < team1 && game.team2));
