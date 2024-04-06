@@ -1,6 +1,32 @@
 'use strict';
 
 ///////////////////////////////////////
+// Coding Challenge #2
+
+/* 
+Let's continue with our football betting app!
+
+1. Loop over the game.scored array and print each player name to the console, 
+along with the goal number (Example: "Goal 1: Lewandowski")
+2. Use a loop to calculate the average odd and log it to the console 
+(We already studied how to calculate averages, you can go check if you don't remember)
+3. Print the 3 odds to the console, but in a nice formatted way, exaclty like this:
+      Odd of victory Bayern Munich: 1.33
+      Odd of draw: 3.25
+      Odd of victory Borrussia Dortmund: 6.5
+Get the team names directly from the game object, don't hardcode them (except for "draw"). HINT: Note how the odds and the game objects have the same property names 😉
+
+BONUS: Create an object called 'scorers' which contains the names of the players who scored as properties, and the number of goals as the value. In this game, it will look like this:
+      {
+        Gnarby: 1,
+        Hummels: 1,
+        Lewandowski: 2
+      }
+
+GOOD LUCK 😀
+*/
+
+///////////////////////////////////////
 // Coding Challenge #1
 
 /* 
@@ -21,7 +47,6 @@ TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Th
 GOOD LUCK 😀
 */
 
-/**
 const game = {
   team1: 'Bayern Munich',
   team2: 'Borrussia Dortmund',
@@ -63,6 +88,19 @@ const game = {
   },
 };
 
+for (const [numGoal, scorer] of game.scored.entries()) {
+  console.log(`Goal ${numGoal + 1}: ${scorer}`);
+}
+
+for (let x of Object.entries(game.odds)) {
+  // console.log(x[0]);
+  let team = x[0];
+  console.log(`Odd of victory ${game.team}`);
+}
+
+// console.log((team1 < team2 && game.team1) || (team2 < team1 && game.team2));
+
+/**
 const [players1, players2] = game.players;
 
 const [gk1, ...fieldPlayers1] = players1;
@@ -92,9 +130,8 @@ console.log((team1 < team2 && game.team1) || (team2 < team1 && game.team2));
 // Data needed for a later exercise
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
-*/
-// Data needed for first part of the section
 
+// Data needed for first part of the section
 const openingHours = {
   thu: {
     open: 12,
@@ -134,6 +171,31 @@ const restaurant = {
   },
 };
 
+/**
+//Property NAMES
+const properties = Object.keys(openingHours);
+// console.log(properties);
+
+let openMsg = `We are open on ${properties.length} days: `;
+
+for (const day of properties) {
+  openMsg += `${day}, `;
+}
+
+console.log(openMsg);
+
+// Property VALUES
+const values = Object.values(openingHours);
+console.log(values);
+
+//Entire object
+const entries = Object.entries(openingHours);
+console.log(entries);
+
+for (const [key, { open, close }] of entries) {
+  console.log(`On ${key} we open at ${open} and close at ${close}`);
+}
+
 const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
 
 for (const [i, el] of menu.entries()) {
@@ -151,7 +213,32 @@ restaurant.orderDelivery({
   address: 'Vic Park',
 });
 
-/**
+if (restaurant.openingHours && restaurant.openingHours.mon)
+  console.log(restaurant.openingHours.mon.open);
+
+// w/ optional chaining
+console.log(restaurant.openingHours.mon?.open);
+console.log(restaurant.openingHours?.mon?.open);
+
+const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+for (const day of weekdays) {
+  const open = restaurant.openingHours[day]?.open ?? 'closed';
+  console.log(`On ${day}, we open at ${open}`);
+}
+
+//Methods
+console.log(restaurant.orderDelivery?.(0, 1) ?? 'Method does not exist.');
+
+// Arrays
+const users = [
+  {
+    firstName: 'jonas',
+    email: 'hello@jonas.com',
+  },
+];
+console.log(users[0]?.name ?? 'User array empty.');
+
 
 const rest1 = {
   name: 'Capri',
