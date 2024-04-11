@@ -63,6 +63,8 @@ TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Th
 GOOD LUCK 😀
 */
 
+////////// Sets and Maps Betting Apps
+/**
 const game = {
   team1: 'Bayern Munich',
   team2: 'Borrussia Dortmund',
@@ -147,7 +149,6 @@ console.log(
 for (const [time, event] of gameEvents) {
   console.log(`[${time <= 45 ? 'FIRST' : 'SECOND'} HALF] ${time}: ${event}`);
 }
-/**
 for (const [numGoal, scorer] of game.scored.entries())
   console.log(`Goal ${numGoal + 1}: ${scorer}`);
 
@@ -188,6 +189,8 @@ printGoals(...game.scored);
 
 console.log((team1 < team2 && game.team1) || (team2 < team1 && game.team2));
 
+*/
+
 // Data needed for a later exercise
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
@@ -207,6 +210,9 @@ const openingHours = {
     close: 24,
   },
 };
+
+////////////// Restaurant
+
 const restaurant = {
   name: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
@@ -231,6 +237,31 @@ const restaurant = {
     console.log(otherIngredients);
   },
 };
+
+console.log(flights.lastIndexOf('433'));
+console.log(flights.slice(18, 31));
+
+console.log(flights.slice(flights.indexOf(';')));
+console.log(flights.slice(flights.lastIndexOf(';') + 1));
+
+console.log(flights.slice(-6));
+
+const checkMiddleSeat = function (seat) {
+  // B and E are middle seats
+  console.log(
+    'BE'.indexOf(seat.slice(-1)) >= 0
+      ? 'You got middle seat. :('
+      : 'You got lucky. :)'
+  );
+};
+
+checkMiddleSeat('11B');
+checkMiddleSeat('24C');
+checkMiddleSeat('32E');
+
+console.log(flights.toUpperCase());
+
+/**
 
 const ordersSet = new Set([
   'Pasta',
