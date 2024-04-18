@@ -104,7 +104,7 @@ greeterHello('DDDD');
 greetDeclaration('Hi')('Dylan');
 greetDeclaration('Yo')('DDD');
 
-
+// CALL APPLY BIND
 const lufthansa = {
   airline: 'Lufthansa',
   iataCode: 'LH',
@@ -132,11 +132,8 @@ const book = lufthansa.book;
 
 //CALL
 book.call(eurowings, 23, 'Dylan');
-console.log(eurowings);
 
 book.call(lufthansa, 423, 'Sarah');
-
-console.log(lufthansa);
 
 const swiss = {
   airline: 'Swiss Air Lines',
@@ -151,28 +148,35 @@ const flightData = [583, 'George Cooper'];
 book.apply(swiss, flightData);
 //CALL
 book.call(swiss, ...flightData);
-*/
-
-console.log(swiss);
 
 //BIND
-const bookEW = book.bind(lufthansa);
+const bookEW = book.bind(eurowings);
+const bookLH = book.bind(lufthansa);
+const bookLX = book.bind(swiss);
+
+bookEW(12, 'Steven Williams');
+
+// Partial application
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23('Jonas Schmedtmann');
+bookEW23('Martha Cooper');
+
+console.log(lufthansa, eurowings);
+console.log(swiss);
 
 // With Event Listeners
 lufthansa.planes = 300;
 lufthansa.buyPlane = function () {
   console.log(this);
-
   this.planes++;
   console.log(this.planes);
 };
 // lufthansa.buyPlane();
-
 document
   .querySelector('.buy')
   .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
 
-// Partial application
+// more partial application without main object to bind to
 const addTax = (rate, value) => value + value * rate;
 console.log(addTax(0.1, 200));
 
@@ -188,8 +192,14 @@ const addTaxRate = function (rate) {
   };
 };
 
-const showTotal = addTaxRate(0.1);
+// OR
+// const addTaxRate = rate => value => value + value * rate;
+
+const showTotal = addTaxRate(0.23);
 console.log(showTotal(100));
+console.log(showTotal(23));
+
+*/
 
 ///////////////////////////////////////
 // Coding Challenge #1
@@ -210,9 +220,17 @@ Here are your tasks:
         3: C++
         (Write option number)
   
-  1.2. Based on the input number, update the answers array. For example, if the option is 3, increase the value AT POSITION 3 of the array by 1. Make sure to check if the input is a number and if the number makes sense (e.g answer 52 wouldn't make sense, right?)
+  1.2. Based on the input number, update the answers array.
+  For example, if the option is 3, increase the value AT POSITION 3 of the array by 1.
+  Make sure to check if the input is a number and if the number makes sense
+  (e.g answer 52 wouldn't make sense, right?)
 2. Call this method whenever the user clicks the "Answer poll" button.
-3. Create a method 'displayResults' which displays the poll results. The method takes a string as an input (called 'type'), which can be either 'string' or 'array'. If type is 'array', simply display the results array as it is, using console.log(). This should be the default option. If type is 'string', display a string like "Poll results are 13, 2, 4, 1". 
+3. Create a method 'displayResults' which displays the poll results.
+The method takes a string as an input (called 'type'),
+which can be either 'string' or 'array'. If type is 'array',
+simply display the results array as it is, using console.log().
+This should be the default option. If type is 'string',
+display a string like "Poll results are 13, 2, 4, 1". 
 4. Run the 'displayResults' method at the end of each 'registerNewAnswer' method call.
 
 HINT: Use many of the tools you learned about in this and the last section 😉
@@ -230,46 +248,58 @@ const poll = {
   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
   // This generates [0, 0, 0, 0]. More in the next section 😃
   answers: new Array(4).fill(0),
-  registerNewAnswer: function () {
+  registerNewAnswer() {
+    // const answer = Number(
+    //   prompt(`What is your favourite programming language?
+    //   0: JavaScript
+    //   1: Python
+    //   2: Rust
+    //   3: C++
+    //   (Write option number)`)
+    // );
     const answer = Number(
-      prompt(`What is your favourite programming language?
-      0: JavaScript
-      1: Python
-      2: Rust
-      3: C++
-      (Write option number)`)
+      prompt(
+        `${this.question} \n ${[...this.options].join(
+          '\n'
+        )} \n (Write option number)`
+      )
     );
-    this.answers[answer]++;
-    this.displayResults('string');
-    return this.displayResults();
-  },
-  displayResults: function (type = []) {
-    console.log(typeof type);
 
+    // this.answers[answer]++;
+    typeof answer === 'number' &&
+      answer < this.answers.length &&
+      this.answers[answer]++;
+
+    this.displayResults();
+    this.displayResults('string');
+  },
+  displayResults(type = 'array') {
     console.log(
-      typeof type === 'array'
+      type === 'array'
         ? this.answers
-        : `Poll results are ${String(...this.answers)}`
+        : `Poll results are ${this.answers.join(', ')}`
     );
   },
 };
 
-// const registerNewAnswer = function () {
-//   const answer = Number(
-//     prompt(`What is your favourite programming language?
-//     0: JavaScript
-//     1: Python
-//     2: Rust
-//     3: C++
-//     (Write option number)`)
-//   );
-//   this.answers[answer]++;
-// };
-
-// document
-//   .querySelector('.poll')
-//   .addEventListener('click', registerNewAnswer.bind(poll));
-
 document
   .querySelector('.poll')
   .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+//BONUS TEST DATA 1: [5, 2, 3]
+// BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
+
+// TRY CALL
+poll.displayResults.call({ answers: [5, 2, 3] });
+poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] });
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
+
+// const displayTestData1 = poll.displayResults.bind({ answers: [5, 2, 3] });
+// const displayTestData2 = poll.displayResults.bind({
+//   answers: [1, 5, 3, 9, 6, 1],
+// });
+// displayTestData1('string');
+// displayTestData1();
+// displayTestData2('string');
+// displayTestData2();
