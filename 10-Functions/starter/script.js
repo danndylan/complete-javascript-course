@@ -98,7 +98,11 @@ greet('Hello')('Jonas');
 const greetDeclaration = greeting => nameVar =>
   console.log(`${greeting} ${nameVar}`);
 
-greetDeclaration('Hello')('Dylan');
+const greeterHello = greetDeclaration('Hello');
+greeterHello('Dylan');
+greeterHello('DDDD');
+greetDeclaration('Hi')('Dylan');
+greetDeclaration('Yo')('DDD');
 
 
 const lufthansa = {
@@ -113,8 +117,8 @@ const lufthansa = {
   },
 };
 
-lufthansa.book(23, 'dylan');
-lufthansa.book(224, 'john');
+lufthansa.book(23, 'Dylan');
+lufthansa.book(635, 'John Smith');
 
 const eurowings = {
   airline: 'Eurowings',
@@ -124,13 +128,13 @@ const eurowings = {
 
 const book = lufthansa.book;
 
-// book(23, 'sarah');
+// book(23, 'Sarah Williams');
 
 //CALL
-book.call(eurowings, 23, 'dylan');
+book.call(eurowings, 23, 'Dylan');
 console.log(eurowings);
 
-book.call(lufthansa, 423, 'sarah');
+book.call(lufthansa, 423, 'Sarah');
 
 console.log(lufthansa);
 
@@ -145,11 +149,47 @@ book.call(swiss, 583, 'Mary Cooper');
 //APPLY
 const flightData = [583, 'George Cooper'];
 book.apply(swiss, flightData);
+//CALL
+book.call(swiss, ...flightData);
+*/
+
 console.log(swiss);
 
-book.call(swiss, ...flightData);
+//BIND
+const bookEW = book.bind(lufthansa);
 
-*/
+// With Event Listeners
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  console.log(this);
+
+  this.planes++;
+  console.log(this.planes);
+};
+// lufthansa.buyPlane();
+
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+// Partial application
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+const addVAT = addTax.bind(null, 0.23);
+// addVAT = value => value + value * 0.23;
+
+console.log(addVAT(100));
+console.log(addVAT(23));
+
+const addTaxRate = function (rate) {
+  return function (value) {
+    return value + value * rate;
+  };
+};
+
+const showTotal = addTaxRate(0.1);
+console.log(showTotal(100));
 
 ///////////////////////////////////////
 // Coding Challenge #1
