@@ -242,7 +242,7 @@ BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 
 GOOD LUCK 😀
 */
-
+/**
 const poll = {
   question: 'What is your favourite programming language?',
   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
@@ -303,3 +303,57 @@ poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
 // displayTestData1();
 // displayTestData2('string');
 // displayTestData2();
+
+ */
+
+// Closure
+const secureBooking = function () {
+  let passengerCount = 0;
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBooking();
+booker();
+booker();
+booker();
+console.dir(booker);
+
+let f;
+
+const g = function () {
+  let a = 5;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  let b = 10;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g();
+f();
+console.dir(f);
+
+// re-assigned f()
+h();
+f();
+console.dir(f);
+
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n}`);
+  }, 1000);
+  console.log(`Will start boarding in ${wait} seconds.`);
+};
+
+setTimeout(function () {
+  console.log('TIMER');
+}, 1000);
